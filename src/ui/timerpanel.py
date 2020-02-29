@@ -17,7 +17,7 @@ class TimerPanel(wx.Panel, Observer):
     def _initValue(self):
         '''range 0-360'''
         self._value = 0
-        self._endCount = 1
+        self._endCount = 0
     
     def _initUi(self):
         self.SetBackgroundStyle(wx.BG_STYLE_CUSTOM)
@@ -47,23 +47,33 @@ class TimerPanel(wx.Panel, Observer):
           r = w / 6
         dc.Clear()
         dc.SetPen(wx.Pen(wx.RED, r))
-        dc.DrawCircle(w / 2, h / 2, r*2)
+        dc.DrawCircle(w/2, h/2, r*2)
         
         gc = wx.GraphicsContext.Create(dc)
         start = math.radians(270)
         self.max = 360
         self.min = 0
-        current = 360 * self._value / self._endCount
-        arcStep = 360 / (self.max - self.min) * current
+
+        arcStep = 0
+        if (self._endCount > 0):
+            current = 360 * self._value / self._endCount
+            arcStep = 360 / (self.max - self.min) * current
         end = math.radians(270+arcStep)
         path = gc.CreatePath()
-        path.AddArc(w / 2, h / 2, r*2, start, end, True)
+        path.AddArc(w/2, h/2, r*2, start, end, True)
         pen = wx.Pen('#F0F0F0', r*1.1)
         pen.SetCap(wx.CAP_BUTT)
         gc.SetPen(pen)
         gc.SetBrush(wx.Brush('#F0F0F0', wx.TRANSPARENT))
         gc.DrawPath(path)
+        self._OnDrawLeftTime(dc, w/2, h/2, r*0.9)
         
+    def _OnDrawLeftTime(self, dc, x, y, fontSize):
+        font = wx.Font(fontSize, wx.ROMAN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD) 
+        dc.SetFont(font) 
+        leftTime = str(self._endCount-self._value)
+        dc.DrawText(leftTime, x - (fontSize * len(leftTime)*0.4), (y - fontSize*0.6)) 
+
     def OnSize(self, event):
         event.Skip()
         self.Refresh()    
@@ -75,5 +85,5 @@ class TimerPanel(wx.Panel, Observer):
         self.OnDrawInitTimer(endCount)
 
     def OnStop(self, ):
-        self.OnDrawInitTimer(1)
+        self.OnDrawInitTimer(0)
         self.parent.OnWindowSizeUp()

@@ -21,6 +21,7 @@ class ButtonPanel(wx.Panel):
         self.timeCount.SetValue("15")
         btnBox.Add(self.timeCount, 1, wx.EXPAND, 1)
         self.timeCount.Bind(wx.EVT_TEXT_ENTER, self.OnStartBtn)
+        self.buttonList.append(self.timeCount)
 
         self.lblMin = wx.StaticText(self, style = wx.ALIGN_BOTTOM,label=" Min ", size=(30,28))
         btnBox.Add(self.lblMin, 0, wx.EXPAND, 1)
@@ -128,6 +129,7 @@ class ButtonPanel(wx.Panel):
             btn.SetLabel("Stop")
             self.bntLabel = btnLabel
             self.clickedBtn = btn
+            self.timeCount.SetValue(str(int(count/60)))
             self.toggleButton(False)
             btn.Enable(True)
 
