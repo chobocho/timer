@@ -120,6 +120,7 @@ class ButtonPanel(wx.Panel):
             self.timer.Stop()
             self.cbtimer.Stop()
             btn.SetLabel(self.bntLabel)
+            self.timeCount.SetValue("15")
             self.clickedBtn = None
             self.toggleButton(True)
         else:

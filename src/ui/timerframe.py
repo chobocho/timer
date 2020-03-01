@@ -4,14 +4,15 @@ from ui.buttonpanel import *
 from ui.timermenu import * 
 from cbtimer.cbtimer import *
 import time
-import random
 
 WINDOW_SIZE = 480
 
 class TimerFrame(wx.Frame):
-    def __init__(self, *args, **kw):
+    def __init__(self, *args, version, **kw):
         super(TimerFrame, self).__init__(*args, **kw)
     
+        self.version = version
+
         sizer = wx.BoxSizer(wx.VERTICAL)
         self.timerPanel = TimerPanel(self, parent_=self)    
 
@@ -22,24 +23,26 @@ class TimerFrame(wx.Frame):
         sizer.Add(self.timerPanel, 1, wx.EXPAND)
 
         self.SetSizer(sizer)
-
         self._addMenubar()
 
     def _addMenubar(self):
         self.menu = TimerMenu(self)
 
     def OnWindowSizeUp(self):
-        delta = random.randint(1,10)
-        self.MoveXY(10,10)
-        self.SetSize(WINDOW_SIZE*2+delta, WINDOW_SIZE*2+delta)
         self.ToggleWindowStyle(wx.STAY_ON_TOP)
-        time.sleep(0.1)
+        self.Maximize()
+        self.OnShowMessasgeBox(self.version, 'Timer expired!')
         self.ToggleWindowStyle(wx.STAY_ON_TOP)
+        self.Move(240,240)
+        self.SetSize(WINDOW_SIZE, WINDOW_SIZE)
 
     def OnQuit(self, event):
         self.Close()
 
     def OnAbout(self, event):
-        msg = 'ChoboTimer V0.1\nhttp://chobocho.com'
         title = 'About'
+        msg = 'ChoboTimer V0.1\nhttp://chobocho.com'
+        self.OnShowMessasgeBox(title, msg)
+
+    def OnShowMessasgeBox(self, title, msg):
         wx.MessageBox(msg, title, wx.OK | wx.ICON_INFORMATION)
