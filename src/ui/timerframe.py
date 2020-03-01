@@ -30,6 +30,7 @@ class TimerFrame(wx.Frame):
 
     def OnWindowSizeUp(self):
         delta = random.randint(1,10)
+        self.MoveXY(10,10)
         self.SetSize(WINDOW_SIZE*2+delta, WINDOW_SIZE*2+delta)
         self.ToggleWindowStyle(wx.STAY_ON_TOP)
         time.sleep(0.1)
