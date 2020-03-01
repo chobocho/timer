@@ -1,7 +1,7 @@
 import wx
 from ui.timerframe import *
 
-SW_TITLE = "ChoboTimer V0.11"
+SW_TITLE = "ChoboTimer V0.12"
 WINDOW_SIZE = 480
 
 def main(): 
