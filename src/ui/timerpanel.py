@@ -85,5 +85,8 @@ class TimerPanel(wx.Panel, Observer):
         self.OnDrawInitTimer(endCount)
 
     def OnStop(self, ):
+        print("OnStop " + str(self._value) + " " + str(self._endCount))
+        pressStopBtn = self._value < self._endCount
         self.OnDrawInitTimer(0)
-        self.parent.OnWindowSizeUp()
+        if pressStopBtn == False:
+            self.parent.OnWindowSizeUp()
