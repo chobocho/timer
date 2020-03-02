@@ -40,7 +40,7 @@ class TimerFrame(wx.Frame):
 
     def OnAbout(self, event):
         title = 'About'
-        msg = 'ChoboTimer V0.1\nhttp://chobocho.com'
+        msg = self.version+'\nhttp://chobocho.com'
         self.OnShowMessasgeBox(title, msg)
 
     def OnShowMessasgeBox(self, title, msg):
