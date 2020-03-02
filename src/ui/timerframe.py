@@ -33,8 +33,7 @@ class TimerFrame(wx.Frame):
         self.Maximize()
         self.OnShowMessasgeBox(self.version, 'Timer expired!')
         self.ToggleWindowStyle(wx.STAY_ON_TOP)
-        self.Move(240,240)
-        self.SetSize(WINDOW_SIZE, WINDOW_SIZE)
+        self.Maximize(maximize=False)
 
     def OnQuit(self, event):
         self.Close()
