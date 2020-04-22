@@ -17,7 +17,7 @@ class TimerFrame(wx.Frame):
         self.timerPanel = TimerPanel(self, parent_=self)    
 
         cbtimer = CBTimer(self.timerPanel)
-        self.buttonPanel = ButtonPanel(self, parent_=self, cbtimer_=cbtimer, size=(WINDOW_SIZE, 50))    
+        self.buttonPanel = ButtonPanel(self, parent_=self, cbtimer_=cbtimer, size=(WINDOW_SIZE, 70))    
         sizer.Add(self.buttonPanel, 0, wx.EXPAND, 1)
 
         sizer.Add(self.timerPanel, 1, wx.EXPAND)
