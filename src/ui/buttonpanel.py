@@ -23,25 +23,27 @@ class ButtonPanel(wx.Panel):
 
         self.timerName = wx.TextCtrl(self, style = wx.TE_PROCESS_ENTER, size=(310,25))
         self.timerName.SetValue("")
-        nameBox.Add(self.timerName, 1, wx.EXPAND, 1)
+        self.buttonList.append(self.timerName)
+        nameBox.Add(self.timerName, 0, wx.ALIGN_CENTRE|wx.ALL, 1)
 
         nameBoxClearBtnId = wx.NewId()
         self.nameBoxClearBtn = wx.Button(self, nameBoxClearBtnId, "Clear", size=(50,30))
         self.nameBoxClearBtn.Bind(wx.EVT_BUTTON, self.OnClearTimerName)
+        self.buttonList.append(self.nameBoxClearBtn)
         nameBox.Add(self.nameBoxClearBtn, 0, wx.ALIGN_CENTRE|wx.ALL, 1)
 
         sizer.Add(nameBox, 1, wx.BOTTOM, 1)
         #
 
         btnBox = wx.BoxSizer(wx.HORIZONTAL)
-        self.timeCount = wx.TextCtrl(self, style = wx.TE_PROCESS_ENTER, size=(30,25))
+        self.timeCount = wx.TextCtrl(self, style = wx.TE_PROCESS_ENTER, size=(50,25))
         self.timeCount.SetValue("15")
-        btnBox.Add(self.timeCount, 1, wx.EXPAND, 1)
+        btnBox.Add(self.timeCount, 0, wx.ALIGN_CENTRE|wx.ALL, 1)
         self.timeCount.Bind(wx.EVT_TEXT_ENTER, self.OnStartBtn)
         self.buttonList.append(self.timeCount)
 
         self.lblMin = wx.StaticText(self, style = wx.ALIGN_BOTTOM,label=" Min ", size=(30,28))
-        btnBox.Add(self.lblMin, 0, wx.EXPAND, 1)
+        btnBox.Add(self.lblMin, 0, wx.ALIGN_CENTRE|wx.ALL, 1)
 
         startBtnId = wx.NewId()
         self.startBtn = wx.Button(self, startBtnId, "Start", size=(50,30))
